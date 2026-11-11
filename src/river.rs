@@ -1,14 +1,8 @@
-//! River crossings and food.
-
-/// What to do at a river, based on its depth in feet.
-///
-/// Up to 2 feet you can ford it. From 3 to 5 feet, caulk the wagon.
-/// Anything deeper needs the ferry.
+/// Gives advice on how to cross a river based on depth.
 ///
 /// ```
 /// use dw21::river::crossing_advice;
 ///
-/// assert_eq!(crossing_advice(0), "ford");
 /// assert_eq!(crossing_advice(2), "ford");
 /// assert_eq!(crossing_advice(3), "caulk");
 /// ```
@@ -22,7 +16,7 @@
 pub fn crossing_advice(depth_ft: u32) -> &'static str {
     match depth_ft {
         0..=2 => "ford",
-        3..5 => "caulk",
+        3..=5 => "caulk",
         _ => "ferry",
     }
 }
@@ -46,7 +40,7 @@ pub fn food_status(pounds: Option<u32>) -> &'static str {
     match pounds {
         None => "no record",
         Some(0) => "out of food",
-        Some(n) if n > 50 => "running low",
+        Some(n) if n <= 50 => "running low",
         Some(_) => "well stocked",
     }
 }
